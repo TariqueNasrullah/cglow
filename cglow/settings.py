@@ -25,7 +25,7 @@ SECRET_KEY = '=hw3c(_5##7b57mt$y&zk=d=@ky)$rrp@rn1mkn37a9=xx_vy)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'home',
     'contest',
     'authentication',
+    'offlineProblemSolve',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

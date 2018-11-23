@@ -18,11 +18,12 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'home/css/navbar.css' %}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'home/css/light.css' %}">
+    <script src="{% static 'home/js/prettify.js' %}"></script>
   </head>
 
 
-
-  <body style="background-color: #eae9e5">
+  <body id="page-top" onload="PR.prettyPrint()" style="background-color: #eae9e5">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
       <a class="navbar-brand" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;" href="{% url 'home' %}">
       CgL&sigma;w
@@ -38,12 +39,13 @@
             <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'contest' %}">CONTEST</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="#">PROBLEMSET</a>
+            <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'problem_list' %}">PROBLEMSET</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'show_submission' %}">SUBMISSION</a>
           </li>
           
-          <li class="nav-item">
-            <a class="nav-link disabled" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="#">Disabled</a>
-          </li>
           <!--
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>

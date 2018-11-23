@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^', include('home.urls')),
     url(r'^contest/', include('contest.urls')),
     url(r'^authentication/', include('authentication.urls')),
+    url(r'^problemset/', include('offlineProblemSolve.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

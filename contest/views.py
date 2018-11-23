@@ -76,7 +76,8 @@ def contest_show_problem(request, pk=None, problem_id=None):
 				instance = contest_submission(problem_id=problem_id, user_id=request.user, uploaded_file=uploaded_file, language=language)
 				instance.save()
 				contest_submission_ack.delay(instance.pk)
-
+				#redirect to submission page
+				
 		context = {}
 		if request.user.is_authenticated:
 			context['username'] = request.user.username

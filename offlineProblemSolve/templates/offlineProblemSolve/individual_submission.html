@@ -1,0 +1,87 @@
+{% extends 'home/header.html' %}
+
+{% block content %}
+	<div>
+		<div>
+            <p style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;padding-left: 5rem; font-size: 35px; font-weight: 550; color: rgb(96, 96, 96); text-align: center;"> Submissions </p>
+        </div>
+
+		<div style="width: 90%; margin: 0 auto; background-color: red;">
+			<div class="row">
+				<div class="col-lg-12 col-md-12" style="background-color: white;">
+					<div style="padding-top: 2rem;" >
+						<div class="container">
+							<div class="tablec">
+								<table class="table table-striped">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Author</th>
+											<th>Problem</th>
+											<th>Submission Time</th>
+											<th>Language</th>
+											<th>Verdict</th>
+										</tr>
+									</thead>
+									<tbody>
+											<tr>
+												<td>{{ submission.id }}</td>
+
+												<td> {{submission.author}} </td>
+												<td>{{submission.problem_id.problem_name}}</td>
+												
+												<td> {{ submission.submission_time }} </td>
+												<td> {{submission.language}} </td>
+
+												{% if submission.judge_result == "Accepted" %}
+													<td style="color: green"> {{submission.judge_result}} </td>
+												{% else %}
+													<td style="color: red"> {{ submission.judge_result }} </td>
+												{% endif %}
+											</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<div style="width: 90%; margin: 0 auto; padding-top: 2rem;">
+			<div class="row">
+				<div class="col-lg-6 col-md-6" style="background-color: white; height: 75%">
+					<div style="padding-top: 2rem;" >
+						<div class="container">
+							<pre class="prettyprint linenums"><code class="language-c">{{file_content}}</code></pre>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-1 col-md-1">
+				</div>
+
+				<div class="col-lg-5 col-md-5" style="background-color: white; height: 100%;">
+					<div style="padding-top: 2rem;" >
+						<div class="container" align="center">
+							{% if submission.judge_result == "Accepted" %}
+								<i class="fa fa-check-circle" style="color: green; font-size: 100px;"> </i>
+								<p style="font-size: 35px; font-weight: 550; color: rgb(96, 96, 96);">
+									ACCEPTED!
+								</p>
+							{% else %}
+								<i class="fa fa-close" style="color: red; font-size: 100px;"> </i>
+								<p style="font-size: 35px; font-weight: 550; color: rgb(96, 96, 96);">
+									TO ERR IS HUMAN! 
+								</p>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

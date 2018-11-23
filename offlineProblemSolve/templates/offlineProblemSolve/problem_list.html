@@ -1,0 +1,24 @@
+{% extends 'home/header.html' %}
+
+{% block content %}
+	<div style="height: 2px;"></div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<div class="list-group">
+					{% for problemset in problemset %}
+						<a href="{% url 'show_problem' pk=problemset.id %}" class="list-group-item list-group-item-action list-group-item-contestlist">
+			              <div class="contest-problem-number">
+			                <h2>{{problemset.id}}</h2>
+			              </div>
+			              <div style="width: 90%; float: left;">
+			                <h4 class="contest-problem-title">{{problemset.problem_name}}</h4>
+			              </div>
+			            </a>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
