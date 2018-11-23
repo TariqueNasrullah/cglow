@@ -1,0 +1,87 @@
+{% extends "home/header.html" %}
+
+{% block content %}
+  <div>
+    <h4 class="white-background-header" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">{{contest_info.name}}</h4>
+  </div>
+
+
+
+  <div class="container" style="padding-top: 1rem;">
+    <div class="row">
+      <div class="col-md-9" style="background-color: white; border-radius: 5px;">
+        <div class="col-md-12">
+          <h4 style="padding-top: 1rem; font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">Schedule</h4>
+          <p style="font-family: Candara,Calibri,Segoe,Segoe UI,Optima,Arial,sans-serif; font-size: 15px;">The contest will start on {{contest_info.start_time}} and will run for {{contest_duration}} hours.</p>
+          <h4 style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">Format</h4>
+          <p style="font-family: Candara,Calibri,Segoe,Segoe UI,Optima,Arial,sans-serif; font-size: 15px;">The contest will be hosted in a format similar to that of regular ACM-ICPC programming contests.</p>
+          <h4 style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">Rules</h4>
+          <p style="font-family: Candara,Calibri,Segoe,Segoe UI,Optima,Arial,sans-serif; font-size: 15px;">- Be fair, be honest - Plagiarism will result in disqualification - Judges’ decisions will be final</p>
+        </div>
+      </div>
+
+      <div class="col-md-3" style="height: 100%; border-radius: 5px;">
+        <div class="col-md-12" style="background-color: white; padding-bottom:.5rem;">
+          <div class="container" style="text-align: center;">
+            <div style="display: inline-block; text-align: right;">
+              <h4 id="clock" style="font-family: Geneva,Tahoma,Verdana,sans-serif;  font-weight: 900; font-size: 3vmax ;">00:00:00</h4>
+              <h6 id="contest_status" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; margin-top: -10px;font-weight: 900;">not started</h6>
+            </div>
+
+          </div>
+          <div class="container" style="text-align: center;">
+
+            <a id="enterBtn" href="{% url 'contest_dashboard' pk=contest_id %}" class="btn btn-success" role="button" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-weight: 900; font-size: 20px;">Enter</a>
+            <a id="standingBtn" href="#" class="btn btn-secondary" role="button" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-weight: 900; font-size: 20px;">Standing</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript"> 
+   var start_time = "{{contest_info.start_time|safe}}";
+   var end_time = "{{contest_info.end_time|safe}}";
+   var s = Date.parse(start_time);
+   var e = Date.parse(end_time);
+   var x = setInterval(function() {
+     var n = new Date().getTime();
+     var distance = s-n;
+
+      if(distance < 0){
+        document.getElementById("contest_status").innerHTML = "Contest is Running";
+        document.getElementById("enterBtn").onclick = function(){return true;};
+        document.getElementById("standingBtn").onclick = function(){return true;};
+        distance = e-n;
+        var hour = Math.floor(distance/(3600*1000));
+         distance = Math.floor(distance%(3600*1000));
+         var minute = Math.floor(distance/(60*1000));
+         distance = Math.floor(distance%(60*1000));
+         var seconds = Math.floor(distance/1000);
+
+         document.getElementById("clock").innerHTML = hour + ":" + minute + ":" + seconds;
+
+         if(distance < 0){
+          clearInterval(x);
+          document.getElementById("clock").innerHTML = "00:00:00";
+          document.getElementById("contest_status").innerHTML = "Finished";
+         }
+      }
+      else{
+        document.getElementById("enterBtn").onclick = function(){return false;};
+        document.getElementById("standingBtn").onclick = function(){return false;};
+         var hour = Math.floor(distance/(3600*1000));
+         distance = Math.floor(distance%(3600*1000));
+         var minute = Math.floor(distance/(60*1000));
+         distance = Math.floor(distance%(60*1000));
+         var seconds = Math.floor(distance/1000);
+
+         document.getElementById("clock").innerHTML = hour + ":" + minute + ":" + seconds;
+      }
+
+    }, 1000);
+  </script>
+{% endblock %}

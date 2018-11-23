@@ -1,0 +1,10 @@
+#install Celery
+pip install Celery
+
+# install and run rabbitmq
+
+# run celery worker
+> celery -A cglow worker -l info
+
+
+

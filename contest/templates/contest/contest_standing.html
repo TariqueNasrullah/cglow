@@ -1,0 +1,138 @@
+{% extends 'home/header.html' %}
+
+{% block navitem %}
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'contest_dashboard' pk=contest_id %}">DASHBOARD</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'contest_individual_submission' pk=contest_id %}">SUBMISSOIN</a>
+      <li class="nav-item">
+        <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'contest_standing' pk=contest_id %}">STANDIGS</a>
+      </li>
+    </li>
+  </ul>
+{% endblock %}
+
+{% block content %}
+	<div>
+    	<h4 class="white-background-header" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center;">{{contest_info}}</h4>
+  	</div>
+
+  	<div class="container" style="background-color: white;">
+  		<table class="table">
+  			<thead>
+  				<tr id="table_head" style="text-align: center;">
+  					<th style="width: 10px;">#</th>
+  					<th></th>
+  					<th style="width: 100px"></th>
+  					<th></th>
+  					<th></th>
+  					<th></th>
+  				</tr>
+  			</thead>
+  			<tbody id="tab">
+  				
+  			</tbody>
+  		</table>
+  	</div>
+
+{% endblock %}
+
+
+
+{% block javascript %}
+  <script type="text/javascript">
+  	$(document).ready(function() {
+  		var number_of_problems = {{ number_of_problems|safe }};
+  		var standing = {{ standing|safe }};
+  		var pkk = {{pk|safe}};
+  		
+  		for(var i = 0; i < number_of_problems; i++){
+  			my_data = '';
+            var c = 'A' + i;
+            my_data += '<th>' + String.fromCharCode('A'.charCodeAt() + i) + '</th>';
+            $('#table_head').append(my_data);
+  		}
+
+  		var my_data = '';
+
+  		for(var row = 0; row < standing.length; row++){
+  			my_data += '<tr style="text-align: center;">';
+  			var id = row+1;
+  			my_data += '<td style="font-size: .8em;">' + id + '</td>';
+  			my_data += '<td><h6 style="font-size: 1em; font-weight: 550;font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">' + standing[row][0] + '</h6></td>';
+  			my_data += '<td>' + ' ' + '</td>';
+            my_data += '<td>' + ' ' + '</td>';
+            my_data += '<td>' + ' ' + '</td>';
+
+            my_data += '<td><div><h6 style="font-size: .8em; font-weight: bold;">' + standing[row][1] + '</h6><h6 style="font-size: .7em; margin-top: -.5rem; font-weight: 700;">' + standing[row][2]  + '</h6></div></td>';
+
+            for(var prob_stat = 0; prob_stat < number_of_problems; prob_stat++){
+            	var res = standing[row][3][prob_stat];
+            	
+            	if(res=="sub"){
+            		my_data += '<td><i class="fa fa-times" aria-hidden="true" style="font-size: 1em; color: orange;"></i></td>';
+            	}
+            	else if (res=="ac"){
+            		my_data += '<td><i class="fa fa-check" aria-hidden="true" style="font-size: 1em; color: green;"></i></td>';
+            	}
+            	else{
+            		my_data += '<td></td>';
+            	}
+            }
+            my_data += '</tr>'
+  		}
+
+  		$('#tab').html('')
+  		$('#tab').prepend(my_data);
+
+
+  		var my_refresh = setInterval(function() {
+  			var test = $.ajax({ cache: false, url : '{% url 'contest_standing_server' pk=pk %}' });
+
+  			test.done(function(msg){
+  				var recv = JSON.parse(msg);
+  				var standing = recv.standing;
+
+
+  				var my_data = '';
+
+		  		for(var row = 0; row < standing.length; row++){
+		  			my_data += '<tr style="text-align: center;">';
+		  			var id = row+1;
+		  			my_data += '<td style="font-size: .8em;">' + id + '</td>';
+		  			my_data += '<td><h6 style="font-size: 1em; font-weight: 550;font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">' + standing[row][0] + '</h6></td>';
+		  			my_data += '<td>' + ' ' + '</td>';
+		            my_data += '<td>' + ' ' + '</td>';
+		            my_data += '<td>' + ' ' + '</td>';
+
+		            my_data += '<td><div><h6 style="font-size: .8em; font-weight: bold;">' + standing[row][1] + '</h6><h6 style="font-size: .7em; margin-top: -.5rem; font-weight: 700;">' + standing[row][2]  + '</h6></div></td>';
+
+		            for(var prob_stat = 0; prob_stat < number_of_problems; prob_stat++){
+		            	var res = standing[row][3][prob_stat];
+		            	
+		            	if(res=="sub"){
+		            		my_data += '<td><i class="fa fa-times" aria-hidden="true" style="font-size: 1em; color: orange;"></i></td>';
+		            	}
+		            	else if (res=="ac"){
+		            		my_data += '<td><i class="fa fa-check" aria-hidden="true" style="font-size: 1em; color: green;"></i></td>';
+		            	}
+		            	else{
+		            		my_data += '<td></td>';
+		            	}
+		            }
+		            my_data += '</tr>'
+		  		}
+
+		  		$('#tab').html('')
+		  		$('#tab').prepend(my_data);
+
+
+  			});
+  		}, 5000);
+
+  		
+  	});
+  </script>
+{% endblock %}

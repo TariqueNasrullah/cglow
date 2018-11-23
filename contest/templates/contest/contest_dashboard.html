@@ -1,0 +1,80 @@
+{% extends 'home/header.html' %}
+{% block navitem %}
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'contest_dashboard' pk=contest_id %}">DASHBOARD</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'contest_individual_submission' pk=contest_id %}">SUBMISSOIN</a>
+      <li class="nav-item">
+        <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'contest_standing' pk=contest_id %}">STANDIGS</a>
+      </li>
+    </li>
+  </ul>
+{% endblock %}
+  
+{% block content %}
+  <div>
+    <h4 class="white-background-header" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">{{contest_info}}</h4>
+  </div>
+
+  <div style="height: 2px;"></div>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="list-group">
+          {% for problemset in problemset %}
+            <a href="{% url 'contest_show_problem' pk=contest_id problem_id=problemset.id %}" class="list-group-item list-group-item-action list-group-item-contestlist">
+              <div class="contest-problem-number">
+                <h2>{{problemset.problem_title}}</h2>
+              </div>
+              <div style="width: 90%; float: left;">
+                <h4 class="contest-problem-title">{{problemset.problem_name}}</h4>
+              </div>
+              <div>
+                <i class="fa fa-check" aria-hidden="true" style="color: green; padding-top: .5rem;"></i>
+              </div>
+            </a>
+          {% endfor %}    
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-3">
+        <div class="col-md-12" style="background-color: #fff9f2; border-radius: 5px; border-style: solid; border-width: 1px; text-align: center; padding-top: .6rem;">
+          <h4 id="clock">00:00:00</h4>
+          <h6 id="contest_status" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center;"></h6>
+        </div>
+        <div style="height: 3px;"></div> 
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascript %}
+  <script type="text/javascript">
+    var end_time = "{{contest_info.end_time|safe}}";
+    var e = Date.parse(end_time);
+
+    var x = setInterval(function(){
+      var n = new Date().getTime();
+      var distance = e-n;
+
+      if(distance < 0){
+        clearInterval(x);
+        document.getElementById("clock").innerHTML = "00:00:00";
+        document.getElementById("contest_status").innerHTML = "Finished";
+      }
+      else{
+        var hour = Math.floor(distance/(3600*1000));
+         distance = Math.floor(distance%(3600*1000));
+        var minute = Math.floor(distance/(60*1000));
+         distance = Math.floor(distance%(60*1000));
+        var seconds = Math.floor(distance/1000);
+
+        document.getElementById("clock").innerHTML = hour + ":" + minute + ":" + seconds;
+        document.getElementById("contest_status").innerHTML = "Running";
+      }
+    }, 1000);
+  </script>
+{% endblock %}
