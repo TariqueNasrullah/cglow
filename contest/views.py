@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, render_to_response
+from django.shortcuts import render, HttpResponse, render_to_response, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 from contest.models import contest as contest_table
 from contest.models import contest_problemset
@@ -6,7 +6,7 @@ from contest.models import contest_submission
 from contest.models import contestant_point
 from django.core import serializers
 from contest.forms import UploadFileForm
-
+from django.urls import reverse
 from .tasks import contest_submission_ack
 import datetime
 import pickle
@@ -77,6 +77,8 @@ def contest_show_problem(request, pk=None, problem_id=None):
 				instance.save()
 				contest_submission_ack.delay(instance.pk)
 				#redirect to submission page
+				rl = reverse('contest_individual_submission', kwargs={'pk': pk})
+				return HttpResponseRedirect(rl)
 				
 		context = {}
 		if request.user.is_authenticated:
@@ -101,7 +103,7 @@ def contest_individual_submission(request, pk=None):
 		context['username'] = request.user.username
 
 	#Gather submisssion data
-	l = contest_submission.objects.filter(user_id=request.user, problem_id__contest_id__id=pk)
+	l = contest_submission.objects.filter(user_id=request.user, problem_id__contest_id__id=pk).order_by("-submission_time")
 	context['contest_submission'] = l
 
 	#Gather contest related data

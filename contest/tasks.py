@@ -3,6 +3,9 @@ from cglow.celery import app
 from contest.models import *
 from datetime import datetime, timezone, time
 import math
+import os
+import subprocess
+import filecmp
 
 @app.task
 def contest_submission_ack(pk):
@@ -17,6 +20,60 @@ def contest_submission_ack(pk):
 	# else do the other jobs
 	
 	#update penalty table
+
+	haveAc = contest_submission.objects.filter(problem_id__contest_id__id=submission.problem_id.contest_id.id, problem_id=submission.problem_id, user_id=submission.user_id, judge_result="Accepted").count()
+	
+	if haveAc == 0:
+		BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+		submissionid = submission.id
+		uploadedfile = str(submission.uploaded_file)
+		language = submission.language
+		timelimit = submission.problem_id.problem_time_limit
+		inputfile = str(submission.problem_id.problem_input)
+		outputfile = str(submission.problem_id.problem_out)
+
+		where_to_output = os.path.join(BASE_DIR, "contestData/generatedOutput/{}.txt".format(submissionid))
+
+		if language == "C++" or language == "C":
+			compile_submitted_file = os.system("g++ {} -o solve >/dev/null 2>&1".format(os.path.join(BASE_DIR, uploadedfile)))
+
+			if compile_submitted_file == 0:
+				input_for_c = open(os.path.join(BASE_DIR, inputfile))
+				output_for_c = open(where_to_output, "w")
+				proc = subprocess.Popen("./solve", stdin=input_for_c, stdout=output_for_c, stderr=subprocess.PIPE)
+
+				try:
+					proc.wait(timelimit)
+					proc.communicate()
+					if proc.returncode == 0:
+						ac = filecmp.cmp(os.path.join(BASE_DIR, outputfile), where_to_output)
+						if ac == True:
+							print("Accepted")
+							submission.judge_result = "Accepted"
+						else:
+							print("Wrong Answer")
+							submission.judge_result = "Wrong Answer"
+					else:
+						print("Run Time Error")
+						subprocess.judge_result = "Run Time Error"
+						submission.judge_result = "Run Time Error"
+				except subprocess.TimeoutExpired:
+					proc.kill()
+					print("Time Limit Exceeded")
+					submission.judge_result = "Time Limit Exceeded"
+
+				input_for_c.close()
+				output_for_c.close()
+
+			else:
+				print("Compilation Error")
+				submission.judge_result = "Compilation Error"
+			
+			submission.save()
+	else:
+		return 0;
+
 
 	penalty = 0
 	solve = 0
