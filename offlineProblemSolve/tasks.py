@@ -6,6 +6,7 @@ import math
 import os
 import subprocess
 import filecmp
+import docker
 
 @app.task
 def offline_submission_ack(pk):
@@ -25,43 +26,17 @@ def offline_submission_ack(pk):
 	inputfile = str(this_submission.problem_id.problem_input)
 	outputfile = str(this_submission.problem_id.problem_output)
 
-	
+	judge_pera = "{} {} {} {} {} {}".format(submissionid, inputfile, outputfile, uploadedfile, language, timelimit)
+	client = docker.from_env()
+	ans = client.containers.run("offlinejudger", judge_pera, volumes={'/home/tarique/Desktop/projectCglow/cglow/offlineProblemData/' : {'bind': '/offlineProblemData', 'mode': 'rw'}})
 
-	where_to_output = os.path.join(BASE_DIR, "offlineProblemData/generatedOutput/{}.txt".format(submissionid))
-	
-	if language == "C++" or language == "C":
-		compile_submitted_file = os.system("g++ {} -o solve >/dev/null 2>&1".format(os.path.join(BASE_DIR, uploadedfile)))
+	res = ""
+	fp = open("offlineProblemData/judge_result/{}.txt".format(submissionid), "r")
+	fp_content = fp.read()
+	res = str(fp_content)
+	fp.close()
 
-		if compile_submitted_file == 0:
-			input_for_c = open(os.path.join(BASE_DIR, inputfile))
-			output_for_c = open(where_to_output, "w")
-			proc = subprocess.Popen("./solve", stdin=input_for_c, stdout=output_for_c, stderr=subprocess.PIPE)
+	this_submission.judge_result = fp_content;
+	this_submission.save()
 
-			try:
-				proc.wait(timelimit)
-				proc.communicate()
-				if proc.returncode == 0:
-					ac = filecmp.cmp(os.path.join(BASE_DIR, outputfile), where_to_output)
-					if ac == True:
-						print("Accepted")
-						this_submission.judge_result = "Accepted"
-					else:
-						print("Wrong Answer")
-						this_submission.judge_result = "Wrong Answer"
-				else:
-					print("Run Time Error")
-					this_submission.judge_result="Run Time Error"
-			except subprocess.TimeoutExpired:
-				proc.kill()
-				print("Time Limit Exceeded")
-				this_submission.judge_result = "Time Limit Exceeded"
-			
-			input_for_c.close()
-			output_for_c.close()
-			
-		else:
-			print("Compilation Error")
-			this_submission.judge_result = "Compilation Error"
-
-		this_submission.save()
 	return 0

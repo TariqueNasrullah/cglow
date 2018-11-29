@@ -27,7 +27,7 @@
                                         {% for i in submission %}
                                             <tr style="text-align: center;">
                                                 <td><a href="{% url 'individual_submission' pk=i.id %}">{{i.id}}</a></td>
-                                                <td>{{username}}</td>
+                                                <td>{{i.user_id}}</td>
                                                 <td><a style="color: black;" href="{% url 'show_problem' pk=i.problem_id.id %}">{{i.problem_id.problem_name}}</a></td>
                                                 <td>{{i.submission_time}}</td>
                                                 <td>{{i.language}}</td>
