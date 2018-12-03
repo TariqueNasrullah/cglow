@@ -1,9 +1,10 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from offlineProblemSolve.models import problemset, submission
 from django.core.exceptions import ObjectDoesNotExist
 from offlineProblemSolve.forms import UploadFileForm
 from .tasks import offline_submission_ack
+from django.urls import reverse
 # Create your views here.
 
 def problem_list(request):
@@ -33,6 +34,8 @@ def show_problem(request, pk=None):
 				instance.save()
 				offline_submission_ack.delay(instance.pk)
 				# redirect to submission page
+
+				return HttpResponseRedirect(reverse('show_submission'))
 		context = {}
 
 		if request.user.is_authenticated:

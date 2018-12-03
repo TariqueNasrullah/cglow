@@ -9,9 +9,11 @@ from contest.forms import UploadFileForm
 from django.urls import reverse
 from .tasks import contest_submission_ack
 import datetime
+from datetime import timezone
 import pickle
 import json
 from django.core import serializers
+import datetime
 
 # Create your views here.
 
@@ -19,9 +21,11 @@ def contest_list(request):
 	context = {}
 	if request.user.is_authenticated:
 		context['username'] = request.user.username
-	l = contest_table.objects.all()
+	l = contest_table.objects.filter(end_time__gte = datetime.datetime.now())
 	context['contest_list'] = l
 
+	m = contest_table.objects.filter(end_time__lte = datetime.datetime.now(), start_time__lte = datetime.datetime.now())
+	context['past_contest'] = m
 	return render(request, 'contest/contest_list.html', context)
 
 def contest_info(request, pk=None):
@@ -45,12 +49,24 @@ def contest_info(request, pk=None):
 		return render(request, 'home/404.html')
 
 def contest_dashboard(request, pk=None):
+
+	#gather contest info
+	contest_info = contest_table.objects.get(pk=pk)
+
+	start_time = contest_info.start_time
+	current_time = datetime.datetime.now(timezone.utc)
+	sub = start_time.timestamp() - current_time.timestamp()
+
+	if sub > 0.0:
+		return render(request, 'home/404.html')
+
 	context = {}
 	if request.user.is_authenticated:
 		context['username'] = request.user.username
 
-	#gather contest info
-	contest_info = contest_table.objects.get(pk=pk)
+	
+	
+
 	context['contest_info'] = contest_info
 
 	#gather problem set for this contest
@@ -66,6 +82,14 @@ def contest_show_problem(request, pk=None, problem_id=None):
 	try:
 		# Gather this problem related data
 		problem = contest_problemset.objects.get(pk=problem_id)
+		x = contest_table.objects.get(pk=pk)
+
+		start_time = x.start_time
+		current_time = datetime.datetime.now(timezone.utc)
+		sub = start_time.timestamp() - current_time.timestamp()
+
+		if sub > 0.0:
+			return render(request, 'home/404.html')
 
 		if request.method=='POST':
 			form = UploadFileForm(request.FILES['datafile'])
@@ -98,6 +122,15 @@ def contest_show_problem(request, pk=None, problem_id=None):
 		return render(request, 'home/404.html')
 
 def contest_individual_submission(request, pk=None):
+	contest_info = contest_table.objects.get(pk=pk)
+
+	start_time = contest_info.start_time
+	current_time = datetime.datetime.now(timezone.utc)
+	sub = start_time.timestamp() - current_time.timestamp()
+
+	if sub > 0.0:
+		return render(request, 'home/404.html')
+
 	context = {}
 	if request.user.is_authenticated:
 		context['username'] = request.user.username
@@ -107,7 +140,7 @@ def contest_individual_submission(request, pk=None):
 	context['contest_submission'] = l
 
 	#Gather contest related data
-	contest_info = contest_table.objects.get(pk=pk)
+	
 	context['contest_info'] = contest_info
 	context['contest_id'] = pk
 
@@ -115,13 +148,27 @@ def contest_individual_submission(request, pk=None):
 
 
 def contest_standing(request, pk=None):
+	contest_info = contest_table.objects.get(pk=pk)
+
+	start_time = contest_info.start_time
+	current_time = datetime.datetime.now(timezone.utc)
+	sub = start_time.timestamp() - current_time.timestamp()
+
+	if sub > 0.0:
+		return render(request, 'home/404.html')
+
+	context = {}
+	if request.user.is_authenticated:
+		context['username'] = request.user.username
+
 	context = {}
 	context['contest_id'] = pk
 
 	if request.user.is_authenticated:
 		context['username'] = request.user.username
 	#Gather contest info
-	contest_info = contest_table.objects.get(pk=pk)
+	
+
 	context['contest_info'] = contest_info
 
 	#Calculate ranklist

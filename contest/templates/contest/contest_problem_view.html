@@ -31,7 +31,7 @@
 	          <h6 id="contest_status" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center;"></h6>
 	        </div>
 	        <div style="height: 3px;"></div> 
-	        <div class="col-lg-12 col-md-12" style="background-color: white; padding-top: 2rem; padding-bottom: 2rem; padding-left: 1rem; padding-right: 1rem; border-radius: 5px; border: 1px solid #c6c6c6;">
+	        <div id="submission_form" class="col-lg-12 col-md-12" style="visibility: hidden; background-color: white; padding-top: 2rem; padding-bottom: 2rem; padding-left: 1rem; padding-right: 1rem; border-radius: 5px; border: 1px solid #c6c6c6;">
 					{% if user.is_authenticated %}
 						<form style="margin: 0 auto;" method="post" enctype="multipart/form-data"> {% csrf_token %}
 							<div style="border-radius: 5px;border: 1px solid #73AD21;padding-top: .25rem; padding-bottom: .25rem; padding-left: .25rem;">
@@ -71,6 +71,7 @@
         clearInterval(x);
         document.getElementById("clock").innerHTML = "00:00:00";
         document.getElementById("contest_status").innerHTML = "Finished";
+        document.getElementById("submission_form").style.visibility = 'hidden';
       }
       else{
         var hour = Math.floor(distance/(3600*1000));
@@ -81,6 +82,7 @@
 
         document.getElementById("clock").innerHTML = hour + ":" + minute + ":" + seconds;
         document.getElementById("contest_status").innerHTML = "Running";
+        document.getElementById("submission_form").style.visibility = 'visible';
       }
     }, 1000);
   </script>

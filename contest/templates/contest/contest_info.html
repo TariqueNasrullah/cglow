@@ -31,8 +31,8 @@
           </div>
           <div class="container" style="text-align: center;">
 
-            <a id="enterBtn" href="{% url 'contest_dashboard' pk=contest_id %}" class="btn btn-success" role="button" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-weight: 900; font-size: 20px;">Enter</a>
-            <a id="standingBtn" href="#" class="btn btn-secondary" role="button" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-weight: 900; font-size: 20px;">Standing</a>
+            <a id="enterBtn" href="{% url 'contest_dashboard' pk=contest_id %}" class="btn btn-success" role="button" style="pointer-events: none; font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-weight: 900; font-size: 20px;">Enter</a>
+            <a id="standingBtn" href="{% url 'contest_standing' pk=contest_id %}" class="btn btn-secondary" role="button" style="pointer-events: none; font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-weight: 900; font-size: 20px;">Standing</a>
 
           </div>
         </div>
@@ -53,8 +53,10 @@
 
       if(distance < 0){
         document.getElementById("contest_status").innerHTML = "Contest is Running";
-        document.getElementById("enterBtn").onclick = function(){return true;};
-        document.getElementById("standingBtn").onclick = function(){return true;};
+        //document.getElementById("enterBtn").onclick = function(){return true;};
+        //document.getElementById("standingBtn").onclick = function(){return true;};
+        document.getElementById("enterBtn").style["pointer-events"]= 'auto';
+        document.getElementById("standingBtn").style["pointer-events"] = 'auto';
         distance = e-n;
         var hour = Math.floor(distance/(3600*1000));
          distance = Math.floor(distance%(3600*1000));
@@ -71,8 +73,10 @@
          }
       }
       else{
-        document.getElementById("enterBtn").onclick = function(){return false;};
-        document.getElementById("standingBtn").onclick = function(){return false;};
+        //document.getElementById("enterBtn").onclick = function(){return false;};
+        //document.getElementById("standingBtn").onclick = function(){return false;};
+        document.getElementById("enterBtn").style["pointer-events"] = 'none';
+        document.getElementById("standingBtn").style["pointer-events"] = 'none';
          var hour = Math.floor(distance/(3600*1000));
          distance = Math.floor(distance%(3600*1000));
          var minute = Math.floor(distance/(60*1000));

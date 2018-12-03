@@ -2,7 +2,7 @@
 
 {% block content %}
   <div>
-    <h4 class="white-background-header" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">UPCOMMING CONTESTS</h4>
+    <h4 class="white-background-header" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">UPCOMMING / RUNNING CONTESTS</h4>
   </div>
 
   <div class="container">
@@ -19,5 +19,16 @@
 
   <div style="padding-top: 1rem;">
     <h4 class="white-background-header" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">PAST CONTESTS</h4>
+  </div>
+  <div class="container">
+    <div class="list-group">
+      {% for contest in past_contest %}
+        <a href="{% url 'contest_info' pk=contest.id %}" class="list-group-item list-group-item-action list-group-item-contestlist">
+        <h4 class="contest-name-header">{{contest.name}}</h4>
+        <p class="contest-date-header">{{contest.start_time}}</p>
+        </a>
+      {% endfor%}
+    </div>
+
   </div>
 {% endblock %}
