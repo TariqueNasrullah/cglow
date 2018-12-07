@@ -1,9 +1,19 @@
 {% extends "home/header.html" %}
 
 {% block content %}
-  <div class="container">
-      <h1 style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center; padding-top: 5rem;">Welcome to CgLoW Online Judge</h1>
-      <h4 style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center;">Created and Maintained by JnU_PuzzleMaker</h4>
-      <h6 style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center;">Work in Progress with this site . . . .</h6>
-    </div>
+  	<div class="container">
+    	<div class="row">
+    		<div class="col-md-2" style="vertical-align: middle; text-align: right;">
+
+    			{% load staticfiles %}
+
+    			<img src="{% static 'home/img/tribute.png'%}" alt="Italian Trulli" height="200">
+    		</div>
+    		<div class="col-md-10">
+    			<h1 style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center; padding-top: 5rem;">Welcome to CgLoW Online Judge</h1>
+      			<h4 style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center;">Created and Maintained by JnU_PuzzleMaker</h4>
+      			<h6 style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center;">Work in Progress with this site . . . .</h6>
+    		</div>
+    	</div>  
+   	</div>
 {% endblock %}
