@@ -66,6 +66,8 @@ def contest_submission_ack(pk):
 
 	for i in submission_list:
 		if(i.judge_result == "Accepted"):
+			problem.total_solve += 1
+			problem.save()
 			submission_time = i.submission_time
 			contest_start_time = i.problem_id.contest_id.start_time
 			pnt = submission_time.timestamp() - contest_start_time.timestamp()

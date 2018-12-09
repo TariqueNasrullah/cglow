@@ -14,7 +14,7 @@ import pickle
 import json
 from django.core import serializers
 import datetime
-
+import os
 # Create your views here.
 
 def contest_list(request):
@@ -82,6 +82,14 @@ def contest_show_problem(request, pk=None, problem_id=None):
 	try:
 		# Gather this problem related data
 		problem = contest_problemset.objects.get(pk=problem_id)
+		fl_name, fl_ex = os.path.splitext(str(problem.problem_file))
+
+		file_content = ""
+		if fl_ex == '.txt':
+			f = open(str(problem.problem_file), 'r')
+			file_content = f.read()
+			f.close()
+
 		x = contest_table.objects.get(pk=pk)
 
 		start_time = x.start_time
@@ -115,8 +123,11 @@ def contest_show_problem(request, pk=None, problem_id=None):
 		
 		context['problem'] = problem
 		context['contest_id'] = pk
-
-		return render(request, 'contest/contest_problem_view.html', context)
+		context['file_content'] = file_content
+		if fl_ex == '.txt':
+			return render(request, 'contest/contest_problem_view_text.html', context)
+		else:
+			return render(request, 'contest/contest_problem_view.html', context)
 	
 	except ObjectDoesNotExist:
 		return render(request, 'home/404.html')

@@ -1,0 +1,17 @@
+Pring the Following String withouts quotes.
+
+"Love all, trust a few, do wrong to none"
+
+
+
+<h4> Input </h4>
+
+There is no input file
+
+<h4> Output </h4>
+
+Love all, trust a few, do wrong to none
+
+
+
+
