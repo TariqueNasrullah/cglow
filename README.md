@@ -4,8 +4,7 @@ Make sure ``docker.io``, ``rabbitmq-server`` is installed.
 
 make sure ``rabbitmq-server`` is listening to port ``5672``
 
-Language Requirement:
-	python3
+Language Requirement:  ``python3``
 
 # Installation::
 
@@ -19,11 +18,11 @@ Language Requirement:
 	pip install docker
 
 
-Goto 'projectCglow/cglow/contestjudger' and RUN::
+Goto 'projectCglow/cglow/contestjudger' and RUN
 
 	docker build -t contestjudger .
 
-Goto 'projectCglow/cglow/offlinejudger' and RUN:: 
+Goto 'projectCglow/cglow/offlinejudger' and RUN
 
 	docker build -t offlinejudger .
 
@@ -31,7 +30,7 @@ Goto 'projectCgloW/cglow' and RUN::
 
 	python manage.py runserver
 
-On another terminal, goto 'projectCglow/' and RUN::
+On another terminal, goto 'projectCglow/' and RUN
  
 	source bin/activate
 	cd cglow
