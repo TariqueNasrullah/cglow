@@ -5,9 +5,10 @@ Make sure ``docker.io``, ``rabbitmq-server`` is installed.
 make sure ``rabbitmq-server`` is listening to port ``5672``
 
 Language Requirement::
+
 	python3
 
-#. installation::
+# Installation::
 
 	pip3 install virtualenv
 	python3 -m virtualenv projectCglow
@@ -38,4 +39,4 @@ On another terminal, goto 'projectCglow/' and RUN::
 	celery -A cglow worker -l info
 
 
-#. On your browser locate to http://127.0.0.1:8000
+# On your browser locate to http://127.0.0.1:8000
