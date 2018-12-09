@@ -4,8 +4,7 @@ Make sure ``docker.io``, ``rabbitmq-server`` is installed.
 
 make sure ``rabbitmq-server`` is listening to port ``5672``
 
-Language Requirement::
-
+Language Requirement:
 	python3
 
 # Installation::
