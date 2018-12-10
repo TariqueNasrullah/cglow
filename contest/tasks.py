@@ -36,7 +36,8 @@ def contest_submission_ack(pk):
 
 		judge_pera = "{} {} {} {} {} {}".format(submissionid, inputfile, outputfile, uploadedfile, language, timelimit)
 		client = docker.from_env()
-		ans = client.containers.run("contestjudger", judge_pera, volumes={'/home/tarique/Desktop/projectCglow/cglow/contestData/' : {'bind': '/contestData', 'mode': 'rw'}})
+		volume_dir = os.path.join(BASE_DIR, 'contestData/')
+		ans = client.containers.run("contestjudger", judge_pera, volumes={volume_dir : {'bind': '/contestData', 'mode': 'rw'}})
 
 		res = ""
 		fp = open("contestData/judge_result/{}.txt".format(submissionid), "r")

@@ -8,6 +8,7 @@ import subprocess
 import filecmp
 import docker
 
+
 @app.task
 def offline_submission_ack(pk):
 	this_submission = submission.objects.get(pk=pk)
@@ -28,7 +29,8 @@ def offline_submission_ack(pk):
 
 	judge_pera = "{} {} {} {} {} {}".format(submissionid, inputfile, outputfile, uploadedfile, language, timelimit)
 	client = docker.from_env()
-	ans = client.containers.run("offlinejudger", judge_pera, volumes={'/home/tarique/Desktop/projectCglow/cglow/offlineProblemData/' : {'bind': '/offlineProblemData', 'mode': 'rw'}})
+	volume_dir = os.path.join(BASE_DIR, 'offlineProblemData/')
+	ans = client.containers.run("offlinejudger", judge_pera, volumes={volume_dir : {'bind': '/offlineProblemData', 'mode': 'rw'}})
 
 	res = ""
 	fp = open("offlineProblemData/judge_result/{}.txt".format(submissionid), "r")
