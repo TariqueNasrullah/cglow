@@ -1,0 +1,36 @@
+A conveyor belt has a number of vessels of different capacities each filled to brim with milk. The milk from conveyor belt is to be filled into 'm' containers. The constraints are:
+
+1.      Whenever milk from a vessel is poured into a container, the milk in the vessel must be completely poured into that container only. That is milk from same vessel cannot be poured into different containers.
+
+2.      The milk from the vessel must be poured into the container in order which they appear in the conveyor belt. That is, you cannot randomly pick up a vessel from the conveyor belt and fill the container.
+
+3.      The ith container must be filled with milk only from those vessels that appear earlier to those that fill jth container, for all i < j.
+
+Given the number of containers m, you have to fill the containers with milk from all the vessels, without leaving any milk in the vessel. The containers need not necessarily have same capacity. You are given the liberty to assign any possible capacities to them. Your job is to find out the minimal possible capacity of the container which has maximal capacity.
+
+Input
+Input starts with an integer T (≤ 100), denoting the number of test cases.
+
+Each case contains two integers n (1 ≤ n ≤ 1000), the number of vessels in the conveyor belt and then m (1 ≤ m ≤ 106), which specifies the number of containers to which you have to transfer the milk. The next line contains the capacity c (1 ≤ c ≤ 106) of each vessel in order which they appear in the conveyor belt. Note that, milk is filled to the brim of any vessel. So the capacity of the vessel is equal to the amount of milk in it.
+
+Output
+For each case, print the case number and the desired result. See the samples for exact formatting.
+
+Sample Input
+Output for Sample Input
+2
+
+5 3
+
+1 2 3 4 5
+
+3 2
+
+4 78 9
+
+Case 1: 6
+
+Case 2: 82
+
+Note
+For the first case, the capacities of the three containers be 6, 4 and 5. So, we can pour milk from the first three vessels to the first container and the rest in other two containers. So, the maximum capacity of the container is 6. Suppose the capacities of the containers be 3, 7 and 5. Then we can also pour the milk, however, the maximum capacity is 7. As we want to find the result, where the maximum capacity is as low as possible; the result is 6.
