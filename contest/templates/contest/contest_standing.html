@@ -16,8 +16,11 @@
 
 {% block content %}
 	<div>
-    	<h4 class="white-background-header" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center;">{{contest_info}}</h4>
-  	</div>
+    	<h4 class="white-background-header" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center; padding-left: 0rem;">{{contest_info}}</h4>
+	
+		<h6 id="clock" class="white-background-header" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; text-align: center; width: 200px; margin: auto; margin-top: -8px; padding-left: 0rem; font-weight: bold;"></h6>
+		
+	  </div>
 
   	<div class="container" style="background-color: white;">
   		<table class="table">
@@ -134,5 +137,54 @@
 
   		
   	});
+
+	$('clock').onload = function(){
+		console.log("loaded");
+	}
+
+	var start_time = "{{contest_info.start_time|safe}}";
+	var end_time = "{{contest_info.end_time|safe}}";
+	var s = Date.parse(start_time);
+	var e = Date.parse(end_time);
+	var x = setInterval(function() {
+		var n = new Date().getTime();
+		var distance = s-n;
+
+		if(distance < 0){
+			//document.getElementById("clock").innerHTML = "Contest is Running";
+			//document.getElementById("enterBtn").onclick = function(){return true;};
+			//document.getElementById("standingBtn").onclick = function(){return true;};
+			//document.getElementById("enterBtn").style["pointer-events"]= 'auto';
+			//document.getElementById("standingBtn").style["pointer-events"] = 'auto';
+			distance = e-n;
+			var hour = Math.floor(distance/(3600*1000));
+			distance = Math.floor(distance%(3600*1000));
+			var minute = Math.floor(distance/(60*1000));
+			distance = Math.floor(distance%(60*1000));
+			var seconds = Math.floor(distance/1000);
+
+			document.getElementById("clock").innerHTML = hour + ":" + minute + ":" + seconds;
+
+			if(distance < 0){
+			clearInterval(x);
+			//document.getElementById("clock").innerHTML = "00:00:00";
+			document.getElementById("clock").innerHTML = "Finished";
+			}
+		}
+		else{
+			//document.getElementById("enterBtn").onclick = function(){return false;};
+			//document.getElementById("standingBtn").onclick = function(){return false;};
+			//document.getElementById("enterBtn").style["pointer-events"] = 'none';
+			//document.getElementById("standingBtn").style["pointer-events"] = 'none';
+			var hour = Math.floor(distance/(3600*1000));
+			distance = Math.floor(distance%(3600*1000));
+			var minute = Math.floor(distance/(60*1000));
+			distance = Math.floor(distance%(60*1000));
+			var seconds = Math.floor(distance/1000);
+
+			document.getElementById("clock").innerHTML = hour + ":" + minute + ":" + seconds;
+		}
+
+		}, 1000);
   </script>
 {% endblock %}

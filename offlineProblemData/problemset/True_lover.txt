@@ -1,0 +1,25 @@
+Ashik got admitted into Department of CSEJnU. His goal is to find his true love. So he is trying to offer his love all 
+his batchmate. He takes all of his friend merit list and chose a merit value randomly. He comes to an interesting
+decision that,is the merit value in even position or not? if it is even he will propose that girl otherwise he will not.
+
+
+input
+In first line there will be two integer n and x. n denotes the number of girls in ashiks class. 
+x denotes the merit that he choose. The next line will be n merit position of his batchmate
+
+output
+print "yes" if he make a propose else print "no"
+
+Input : 
+3 2
+2 3 1
+
+Output :
+no
+
+Input :
+5 2
+5 4 1 2 3
+ 
+Output :
+yes

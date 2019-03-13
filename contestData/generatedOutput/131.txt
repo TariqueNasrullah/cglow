@@ -1,0 +1,3 @@
+give a number from 1to 10:Hello Pouspo,Hello From CSEjnu
+Hello Pouspo,Hello From CSEjnu
+Hello Pouspo,Hello From CSEjnu

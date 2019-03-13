@@ -32,6 +32,9 @@ class contest_submission(models.Model):
 	uploaded_file = models.FileField(upload_to='contestData/user_submission/')
 	language = models.CharField(max_length=50)
 
+	def __str__(self):
+		return self.problem_id.contest_id.name + "  " + self.user_id.username + "  " + self.judge_result
+
 class contestant_point(models.Model):
 	user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 	contest_id = models.ForeignKey(contest, on_delete=models.CASCADE)

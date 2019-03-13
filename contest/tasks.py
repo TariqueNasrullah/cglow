@@ -52,7 +52,7 @@ def contest_submission_ack(pk):
 	else:
 		submission.judge_result = "Passed"
 		submission.save()
-		return 0;
+		return 0
 
 
 	penalty = 0
