@@ -27,6 +27,9 @@ urlpatterns = [
     url(r'^contest/', include('contest.urls')),
     url(r'^authentication/', include('authentication.urls')),
     url(r'^problemset/', include('offlineProblemSolve.urls')),
+    url(r'^judge/', include('judge.urls')),
+    #websocket purpose
+    url(r'^chat/', include('chat.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

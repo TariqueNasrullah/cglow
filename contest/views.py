@@ -7,7 +7,7 @@ from contest.models import contestant_point
 from django.core import serializers
 from contest.forms import UploadFileForm
 from django.urls import reverse
-from .tasks import contest_submission_ack
+from .tasks import contest_submission_ack, websocket_send_submission
 import datetime
 from datetime import timezone
 import pickle
@@ -15,6 +15,10 @@ import json
 from django.core import serializers
 import datetime
 import os
+
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+
 # Create your views here.
 
 def contest_list(request):
@@ -42,6 +46,12 @@ def contest_info(request, pk=None):
 
 		context['contest_duration'] = tm
 		context["contest_id"] = pk
+
+		# websocket testing part
+		group_name = 'judge_6'
+		message = 'triggred from contest_info'
+		async_to_sync(msend)(group_name, message)
+		# websocket testing part ends
 
 		return render(request, 'contest/contest_info.html', context)
 
@@ -107,6 +117,7 @@ def contest_show_problem(request, pk=None, problem_id=None):
 				problem_id = problem
 				instance = contest_submission(problem_id=problem_id, user_id=request.user, uploaded_file=uploaded_file, language=language)
 				instance.save()
+				websocket_send_submission.delay(instance.pk)
 				contest_submission_ack.delay(instance.pk)
 				#redirect to submission page
 				rl = reverse('contest_individual_submission', kwargs={'pk': pk})
@@ -258,3 +269,14 @@ def contest_standing_server(request, pk=None):
 	context['pk'] = pk
 
 	return HttpResponse(json.dumps(context))
+
+async def msend(group_name, message):
+	channel_layer = get_channel_layer()
+
+	await channel_layer.group_send(
+		'{}'.format(group_name),
+		{
+			'type': 'chat_message',
+			'message': message
+		}
+	)

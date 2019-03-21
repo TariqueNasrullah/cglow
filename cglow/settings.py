@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'home',
     'contest',
+    'judge',
     'authentication',
     'offlineProblemSolve',
     'django.contrib.admin',
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +57,17 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'cglow.urls'
+ASGI_APPLICATION = "cglow.routing.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_rabbitmq.core.RabbitmqChannelLayer",
+        "CONFIG": {
+            "host": "amqp://guest:guest@127.0.0.1",
+        },
+    },
+}
+
 
 TEMPLATES = [
     {

@@ -8,6 +8,11 @@ import subprocess
 import filecmp
 import docker
 
+import json
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+from django.core import serializers
+
 @app.task
 def contest_submission_ack(pk):
 	submission = contest_submission.objects.get(pk=pk)
@@ -15,6 +20,7 @@ def contest_submission_ack(pk):
 	problem.total_submit += 1
 	problem.save()
 
+	websocket_send_submission_verdict_change(submission.pk, "Submitted")
 	# Judge the Problem here
 	# let, there was no submission of this user which was accepted
 	# if there is such one just return 0
@@ -34,12 +40,14 @@ def contest_submission_ack(pk):
 		inputfile = str(submission.problem_id.problem_input)
 		outputfile = str(submission.problem_id.problem_out)
 
+		res = "Running"
+		websocket_send_submission_verdict_change(submissionid, res)
+		
 		judge_pera = "{} {} {} {} {} {}".format(submissionid, inputfile, outputfile, uploadedfile, language, timelimit)
 		client = docker.from_env()
 		volume_dir = os.path.join(BASE_DIR, 'contestData/')
 		ans = client.containers.run("contestjudger", judge_pera, volumes={volume_dir : {'bind': '/contestData', 'mode': 'rw'}})
 
-		res = ""
 		fp = open("contestData/judge_result/{}.txt".format(submissionid), "r")
 		fp_content = fp.read()
 		res = str(fp_content)
@@ -48,10 +56,12 @@ def contest_submission_ack(pk):
 		submission.save()
 
 		fp.close()
+		websocket_send_submission_verdict_change(submissionid, res)
 
 	else:
 		submission.judge_result = "Passed"
 		submission.save()
+		websocket_send_submission_verdict_change(submission.pk, "Passed")
 		return 0
 
 
@@ -82,3 +92,52 @@ def contest_submission_ack(pk):
 	contestant.penalty = penalty
 	contestant.solve = solve
 	contestant.save()
+
+@app.task
+def websocket_send_submission(pk):
+	submitted_code = contest_submission.objects.get(pk=pk)
+
+	contest_name = submitted_code.problem_id.contest_id.pk
+	group_name = 'judge_%s' % contest_name
+	message = 'submission'
+
+	sub_code = contest_submission.objects.filter(pk=pk)
+	submitted_code_json = serializers.serialize('json', sub_code)
+
+	async_to_sync(send_submission)(group_name, message, submitted_code_json)
+
+
+@app.task
+def websocket_send_submission_verdict_change(pk, verdict):
+	submissoin = contest_submission.objects.get(pk=pk)
+	contest_name = submissoin.problem_id.contest_id.pk
+	group_name = 'judge_%s' % contest_name
+
+	submission_id = pk
+	message = 'verdict_change'
+	new_verdict = verdict
+
+	async_to_sync(send_submission_verdict_change)(group_name, message, submission_id, new_verdict)
+
+async def send_submission(group_name, message, submitted_code_json):
+	channel_layer = get_channel_layer()
+	await channel_layer.group_send(
+		'{}'.format(group_name),
+		{
+			'type': 'send_submission',
+			'message': message,
+			'submitted_code': submitted_code_json
+		}
+	)
+
+async def send_submission_verdict_change(group_name, message, submission_id, new_verdict):
+	channel_layer = get_channel_layer()
+	await channel_layer.group_send(
+		'{}'.format(group_name),
+		{
+			'type': 'send_submissoin_verdict_change',
+			'message': message,
+			'submission_id': submission_id,
+			'new_verdict': new_verdict
+		}
+	)
