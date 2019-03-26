@@ -23,13 +23,13 @@
     <script src="{% static 'home/js/prettify.js' %}"></script>
     <link rel="stylesheet" href="{% static 'home/css/customcss.css' %}">
   </head>
-  <body class="website-mode" id="page-top">
+  <body class="website-mode">
     <div id="navigation-container">
         <header class="ribbon">
             <div class="content">
                 <div class="h-small">
                     {% if user.is_authenticated %}
-                        <div class="h-avatar animated rubberBand" style="background-image: url(https://www.gravatar.com/avatar/9721bf3…?s=32&d=robohash&r=g);"></div>
+                        <div class="h-avatar animated rubberBand" style="background-image: url('/static/home/img/profilelogo.png');"></div>
                         <div class="h-user">
                             <strong>Hi,</strong>
                             {{user.username}}
