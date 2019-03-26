@@ -16,6 +16,7 @@ Language Requirement:  ``python3``
 	pip install django
 	pip install celery
 	pip install docker
+	pip install channels
 
 
 Goto 'projectCglow/cglow/contestjudger' and RUN

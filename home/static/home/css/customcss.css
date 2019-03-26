@@ -1,0 +1,324 @@
+@charset "utf-8";
+
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+header, footer {
+    display: block;
+}
+
+
+.website-mode{
+    background: url('https://resources.urionlinejudge.com.br/judge/img/5.0/background.jpg') top center #f5f5f5;
+}
+
+
+#navigation-container {
+    height: 100%;
+    min-width: 1000px;
+    line-height: 1;
+    color: #454545;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 12px;
+    -webkit-font-smoothing: antialiased;
+    margin: 0 auto;
+    padding: 0;
+}
+.ribbon {
+    background: #fff;
+    box-shadow: 0 0 10px 0 #dbdbdb;
+}
+
+.ribbon-contest{
+    background: #454545;
+    box-shadow: 0 0 10px 0 #dbdbdb;
+    color: #fff;
+}
+
+.ribbon-contest a{
+    color: #fff;
+}
+
+.content {
+    margin: 0 auto;
+    width: 90%;
+}
+
+.content-big {
+    margin: 0 auto;
+    width: 1100px;
+}
+
+
+/* HEADER */
+
+header {
+    height: 50px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 99999;
+    -webkit-transform: translateZ(0);
+}
+
+.h-large, .h-small, .h-wide{
+    box-sizing: border-box;
+    display: inline-block;
+    float: left;
+    height: 50px;
+}
+
+.h-wide{
+    text-align: right;
+    width: 100%;
+}
+
+.h-small{
+    width: 330px;
+    overflow: hidden;
+}
+
+.h-large{
+    width: 60%;
+}
+
+ol,ul {
+    list-style: none;
+}
+.api-permissions ul{
+    line-height: 20px;
+    list-style: square;
+    padding: 0 15px 15px;
+}
+menu {
+    display: block;
+}
+
+.h-avatar:hover > .h-avatar-menu, .h-avatar:hover > .h-avatar-menu:after,
+#menu li:hover > .h-sub-menu, #menu li:hover > .h-sub-menu:after,
+#menu-contest li:hover > .h-sub-menu, #menu-contest li:hover > .h-sub-menu:after,
+.h-flag:hover > .h-language-menu, .h-flag:hover > .h-language-menu:after{
+    visibility: visible;
+    transition: .1s ease-in-out 0s;
+}
+
+#menu, #menu-contest {
+    margin: 14px 20px 14px 0;
+    text-align: right;
+}
+
+#menu {
+    color: #bbb;
+}
+
+#menu-contest{
+    color: #fff;
+}
+
+#menu > li, #menu-contest > li {
+    display: inline-block;
+    position: relative;
+}
+
+#menu > li > a, #menu-contest > li > a, .friend-request, .friend-request-cancel, .friend-compare, .friend-unfriend, .team-create, .tournament-create, .denounce-topic{
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 10px;
+    margin: 0 3px;
+    padding: 5px 7px;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    text-transform: uppercase;
+}
+
+#menu > li > a{
+    background: #f3f3f3;
+    border: #bbb solid 1px;
+}
+
+#menu-contest > li > a{
+    border: #666 solid 1px;
+    color: #fff;
+}
+
+#menu > li > a:hover, #menu-contest > li > a:hover{
+    background: rgb(118, 93, 230);
+    border-color: rgb(118, 93, 230);
+    color: #fff;
+}
+
+#menu > li > em, #menu-contest > li > em{
+    background: #EE6059;
+    border-radius: 10px;
+    color: #fff;
+    display: inline-block;
+    font-family: BryantMedium;
+    font-size: 10px;
+    line-height: 10px;
+    min-width: 7px;
+    padding: 2px 4px;
+    position: absolute;
+    right: -4px;
+    top: -4px;
+}
+
+#menu > li > a {
+    color: #454545;
+    outline: 0;
+    text-decoration: none;
+}
+
+
+/* h-avatar */
+
+.h-avatar{
+    background-size: 32px;
+    border-radius: 50px;
+    box-shadow: inset 0 2px 0 rgba(0,0,0,.15);
+    float: left;
+    height: 32px;
+    margin: 8px 10px 8px 20px;
+    width: 32px;
+    -webkit-box-shadow: inset 0 2px 0 rgba(0,0,0,.15);
+}
+
+.h-avatar-menu, .h-sub-menu, .h-language-menu{
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 10px 0 #dbdbdb;
+    visibility: hidden;
+    min-width: 110px;
+    padding: 5px 0;
+    position: absolute;
+    text-align: left;
+    transition: .1s ease-in-out 0s;
+    -webkit-transition: all .1s ease-in-out;
+}
+
+.h-avatar-menu, .h-language-menu{
+    top: 45px;
+}
+
+.h-sub-menu{
+    left: 0;
+    top: 28px;
+}
+
+.h-avatar-menu hr, .h-sub-menu hr {
+    margin: 5px;
+    border-top: #bbb dotted 1px;
+}
+
+.h-avatar:hover > .h-avatar-menu, .h-avatar:hover > .h-avatar-menu:after,
+#menu li:hover > .h-sub-menu, #menu li:hover > .h-sub-menu:after,
+#menu-contest li:hover > .h-sub-menu, #menu-contest li:hover > .h-sub-menu:after,
+.h-flag:hover > .h-language-menu, .h-flag:hover > .h-language-menu:after{
+    visibility: visible;
+    transition: .1s ease-in-out 0s;
+}
+
+.h-avatar-menu:after, .h-sub-menu:after, .h-language-menu:after{
+    bottom: 100%;
+    border: solid transparent;
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #fff;
+    border-width: 5px;
+    content: " ";
+    visibility: hidden;
+    height: 0;
+    left: 15%;
+    margin-left: -5px;
+    position: absolute;
+    pointer-events: none;
+    transition: .1s ease-in-out 0s;
+    width: 0;
+}
+
+.h-avatar-menu li a, .h-sub-menu li a, .h-language-menu li a{
+    display: block;
+    font-size: 10px;
+    padding: 7px 15px;
+    text-transform: uppercase;
+}
+
+.h-avatar-menu li a:hover, .h-sub-menu li a:hover, .h-language-menu li a:hover{
+    background: #f3f3f3;
+}
+
+.h-user{
+    float: left;
+    margin: 12px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 175px;
+}
+
+.h-user strong{
+    font-weight: 700;
+}
+
+.h-user i{
+    color: #bbb;
+    display: inline-block;
+    font-size: 10px;
+    max-width: 100%;
+    overflow: hidden;
+    padding: 3px 0 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* FOOTER */
+
+.footer-content {
+    font-size: 11px;
+    margin: 0 auto;
+    width: 986px;
+}
+
+footer {
+    bottom: 0px;
+    position: fixed;
+    z-index: 99999;
+    width: 100%;
+    -webkit-transform: translateZ(0);
+}
+
+footer .site-author {
+    box-sizing: border-box;
+    float: left;
+    padding: 10px 10px 8px 20px;
+    width: 20%;
+}
+
+footer .site-information {
+    box-sizing: border-box;
+    float: left;
+    padding: 10px 10px 8px;
+    text-align: center;
+    width: 60%;
+}
+
+footer .site-information li {
+    display: inline-block;
+    padding: 0 3px;
+}
+
+.site-information li.division {
+    color: #BBB;
+}
+
+footer .site-version {
+    box-sizing: border-box;
+    float: right;
+    padding: 10px 20px 8px 10px;
+    text-align: right;
+    width: 20%;
+}

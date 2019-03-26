@@ -1,0 +1,467 @@
+body {
+        line-height: 1;
+    }
+
+    body {
+        color: #454545;
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 12px;
+        -webkit-font-smoothing: antialiased;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .website-mode{
+        background: url('https://resources.urionlinejudge.com.br/judge/img/5.0/background.jpg') top center #f5f5f5;
+    }
+    #container{
+        height: 100%;
+        min-width:  1000px;
+    }
+    #side-bar{
+        float: left;
+        width: 240px;
+    }
+    #logo{
+        border: 1px solid #BBB;
+        border-radius: 3px;
+        margin: 20px;
+    }
+    .content{
+        margin: 0 auto;
+        width: 1080px;
+    }
+    .page{
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0 0 10px 0 #dbdbdb;
+        height: auto;
+        margin: 75px auto 55px;
+    }
+    .page-api {
+        background: #fff;
+        border-radius: 3px;
+        box-shadow: 0 0 10px 0 #dbdbdb;
+        width: 550px;
+        margin: 75px auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+    .main-content{
+        display: inline-block;
+        width: 720px;
+    }
+
+    #page-name{
+        background-repeat: no-repeat;
+        border: 1px solid #BBB;
+        border-radius: 3px;
+        box-sizing: border-box;
+        margin: 20px 0;
+        position: relative;
+        width: 100%
+    }
+    #page-name {
+        background-image: url('{% static 'judge/img/admin.png' %}');
+    }   
+    #page-name h1{
+        font-family: Bryant;
+        font-size: 22px;
+        font-weight: 700;
+        padding: 12px 10px 12px 80px;
+        text-transform: uppercase;
+    }
+    #page-name p{
+        background: #f3f3f3;
+        border-radius: 0 0 5px 5px;
+        border-top: #bbb solid 1px;
+        margin: 0;
+        font-size: 10px;
+        padding: 7px 10px;
+        text-transform: uppercase;
+    }
+    .pn-dashboard h1{
+        color: #ef4130;
+    }
+
+    .pn-dashboard {
+        background-position: 0px 0px;
+        background-size: 80px 80px;
+    }
+
+    #top-rank{
+        border: 1px solid #BBB;
+        border-radius: 3px;
+        margin: 20px;
+        padding: 0 0 15px;
+        width: 200px;
+    }
+
+    #top-rank{
+        background: url('https://resources.urionlinejudge.com.br/judge/img/5.0/trophy.png') center 6px no-repeat #fff;
+    }
+
+    #top-rank span{
+        background: #f3f3f3;
+        border-bottom: #BBB solid 1px;
+        border-top: #BBB solid 1px;
+        display: block;
+        font-size: 20px;
+        font-weight: 700;
+        margin: 83px 0 15px;
+        padding: 9px;
+        text-align: center;
+    }
+
+    #top-rank p{
+        color: #aaa;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 10px 0 0;
+        text-align: center;
+    }
+
+    #top-rank li{
+        display: list-item;
+        text-align: -webkit-match-parent;
+        border-top: #fff solid 1px;
+        border-bottom: #fff solid 1px;
+        padding: 4px 20px;
+    }
+    #top-rank li:hover{
+        background: #f3f3f3;
+        border-top: #bbb dashed 1px;
+        border-bottom: #bbb dashed 1px;
+    }
+    #top-rank ul{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    #top-rank a{
+        color: #454545;
+        outline: 0;
+        text-decoration: none;
+    }
+
+    .form-left, .form-right, .block-left, .block-right {
+        box-sizing: border-box;
+        width: 48.5%;
+    }
+
+    .form-left, .block-left{
+        float: left;
+    }
+
+    .form-right, .block-right {
+        float: right;
+    }
+
+    .search-box,.filter-box,.st-big-box,.st-box,.st-half-box,.st-small-box,.st-wide-box,.st-api-box {
+        border: 1px solid #BBB;
+        border-radius: 3px;
+        float: left;
+        overflow: hidden;
+    }
+
+    .st-half-box{
+        margin: 0 0 20px 0;
+        width: 46.5%;
+    }
+
+    .search-box h3,.filter-box h3,.st-big-box h3,.st-box h3,.st-half-box h3,.st-small-box h3,.st-wide-box h3,.st-api-box h3,.st-menu-box h3 {
+        background: #f3f3f3;
+        border-bottom: #BBB solid 1px;
+        font-size: 13px;
+        font-weight: 700;
+        margin: 0 auto;
+        padding: 7px 0;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .st-left{
+        float: left;
+    }
+    .st-right{
+        float: right;
+    }
+
+    .st-number{
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 50px;
+        text-align: center;
+        margin: auto;
+    }
+
+    #big-buttons {
+        margin: 20px 0;
+        padding: 0;
+    }
+
+    #big-buttons li {
+        background-image: url('https://resources.urionlinejudge.com.br/judge/img/5.0/button-set-131116.png');
+        background-repeat: no-repeat;
+    }
+
+    #big-buttons div {
+        float: left;
+        margin: 15px 10px 15px 120px;
+        width: 200px;
+    }
+
+    #big-buttons li {
+        background-color: #FFF;
+        border-radius: 3px;
+        border: 1px solid #BBB;
+        /*cursor: pointer;*/
+        height: 95px;
+        position: relative;
+        transform: translateZ(0);
+        overflow: hidden;
+        width: 48.3%;
+        -webkit-transform: translateZ(0);
+    }
+
+    #big-buttons li:before{
+        content: "";
+        bottom: 0;
+        height: 2px;
+        left: 50%;
+        position: absolute;
+        right: 50%;
+        -webkit-transition-property: left, right;
+        transition-property: left, right;
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+        z-index: -1;
+    }
+
+    #big-buttons li:hover:before, #big-buttons li:focus:before, #big-buttons li:active:before {
+        left: 0;
+        right: 0;
+    }
+
+    #big-buttons li.right {
+        float: right;
+        margin: 0 0 20px;
+    }
+
+    #big-buttons li.left {
+        float: left;
+        margin: 0 0 20px;
+    }
+    #big-buttons span {
+        display: block;
+        float: left;
+        font-family: SketchRockwell;
+        font-size: 100px;
+        height: 95px;
+        text-align: center;
+        width: 115px;
+    }
+    #big-buttons a {
+        display: block;
+        font-family: Bryant;
+        font-size: 16px;
+        line-height: 15px;
+        text-transform: uppercase;
+        margin: 0 0 5px;
+        text-decoration: none;
+    }
+
+    #big-buttons b {
+        display: inline-block;
+        font-family: Bryant;
+        font-size: 12px;
+        padding: 5px 0 0;
+        width: 190px;
+    }
+
+    #big-buttons i {
+        font-size: 10px;
+    }
+
+    #big-buttons p {
+        line-height: 15px;
+    }
+
+    .dash-button a,.dash-button b {
+        color: #4cabb9;
+    }
+
+    .dash-button {
+        background-position: -2px -251px;
+        margin: 0 20px 0 0;
+    }
+
+    .dash-button:before{
+        background: #52cec7;
+    }
+
+    tr.red td{
+        background-color: red;
+    }
+
+    .sub-table{
+        border: 1px solid #BBB;
+        border-radius: 3px;
+        box-sizing: border-box;
+    }
+
+    /**************************\
+      Basic Modal Styles
+    \**************************/
+
+    .modal {
+      font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
+    }
+
+    .modal__overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal__container {
+      background-color: #fff;
+      padding: 30px;
+      min-width: 1000px;
+      max-width: 1200px;
+      max-height: 100vh;
+      border-radius: 4px;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    .modal__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal__title {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-weight: 600;
+      font-size: 1.25rem;
+      line-height: 1.25;
+      color: #00449e;
+      box-sizing: border-box;
+    }
+
+    .modal__close {
+      background: transparent;
+      border: 0;
+    }
+
+    .modal__header .modal__close:before { content: "\2715"; }
+
+    .modal__content {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+      color: rgba(0,0,0,.8);
+    }
+
+    .modal__btn {
+      font-size: .875rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: .5rem;
+      padding-bottom: .5rem;
+      background-color: #e6e6e6;
+      color: rgba(0,0,0,.8);
+      border-radius: .25rem;
+      border-style: none;
+      border-width: 0;
+      cursor: pointer;
+      -webkit-appearance: button;
+      text-transform: none;
+      overflow: visible;
+      line-height: 1.15;
+      margin: 0;
+      will-change: transform;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      transition: -webkit-transform .25s ease-out;
+      transition: transform .25s ease-out;
+      transition: transform .25s ease-out,-webkit-transform .25s ease-out;
+    }
+
+    .modal__btn:focus, .modal__btn:hover {
+      -webkit-transform: scale(1.05);
+      transform: scale(1.05);
+    }
+
+    .modal__btn-primary {
+      background-color: #00449e;
+      color: #fff;
+    }
+
+
+
+    /**************************\
+      Demo Animation Style
+    \**************************/
+    @keyframes mmfadeIn {
+        from { opacity: 0; }
+          to { opacity: 1; }
+    }
+
+    @keyframes mmfadeOut {
+        from { opacity: 1; }
+          to { opacity: 0; }
+    }
+
+    @keyframes mmslideIn {
+      from { transform: translateY(15%); }
+        to { transform: translateY(0); }
+    }
+
+    @keyframes mmslideOut {
+        from { transform: translateY(0); }
+        to { transform: translateY(-10%); }
+    }
+
+    .micromodal-slide {
+      display: none;
+    }
+
+    .micromodal-slide.is-open {
+      display: block;
+    }
+
+    .micromodal-slide[aria-hidden="false"] .modal__overlay {
+      animation: mmfadeIn .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+    }
+
+    .micromodal-slide[aria-hidden="false"] .modal__container {
+      animation: mmslideIn .3s cubic-bezier(0, 0, .2, 1);
+    }
+
+    .micromodal-slide[aria-hidden="true"] .modal__overlay {
+      animation: mmfadeOut .3s cubic-bezier(0.0, 0.0, 0.2, 1);
+    }
+
+    .micromodal-slide[aria-hidden="true"] .modal__container {
+      animation: mmslideOut .3s cubic-bezier(0, 0, .2, 1);
+    }
+
+    .micromodal-slide .modal__container,
+    .micromodal-slide .modal__overlay {
+      will-change: transform;
+    }
