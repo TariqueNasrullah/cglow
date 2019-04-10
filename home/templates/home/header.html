@@ -22,6 +22,11 @@
     <link rel="stylesheet" href="{% static 'home/css/light.css' %}">
     <script src="{% static 'home/js/prettify.js' %}"></script>
     <link rel="stylesheet" href="{% static 'home/css/customcss.css' %}">
+
+    {% block stylefile %}
+    
+    {% endblock stylefile %}
+
   </head>
   <body class="website-mode">
     <div id="navigation-container">
@@ -29,7 +34,13 @@
             <div class="content">
                 <div class="h-small">
                     {% if user.is_authenticated %}
-                        <div class="h-avatar animated rubberBand" style="background-image: url('/static/home/img/profilelogo.png');"></div>
+                        <div class="h-avatar animated rubberBand" style="background-image: url('/static/home/img/profilelogo.png');">
+                            <ul class="h-avatar-menu">
+                                <li>
+                                    <a href="{% url 'user_profile' %}">Profile</a>
+                                </li>
+                            </ul>
+                        </div>
                         <div class="h-user">
                             <strong>Hi,</strong>
                             {{user.username}}
