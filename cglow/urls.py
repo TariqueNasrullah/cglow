@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^judge/', include('judge.urls')),
     #websocket purpose
     url(r'^adminstrator/', include('chat.urls')),
+    url(r'^clearification/', include('clearification.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
