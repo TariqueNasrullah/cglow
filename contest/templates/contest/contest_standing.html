@@ -1,18 +1,4 @@
-{% extends 'home/contest_header.html' %}
-
-{% block navitem %}
-  <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'contest_dashboard' pk=contest_id %}">DASHBOARD</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'contest_individual_submission' pk=contest_id %}">SUBMISSOIN</a>
-      <li class="nav-item">
-        <a class="nav-link" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; font-size: 13px;" href="{% url 'contest_standing' pk=contest_id %}">STANDIGS</a>
-      </li>
-    </li>
-  </ul>
-{% endblock %}
+{% extends "home/contest_header.html" %}
 
 {% block content %}
 	<div>
@@ -23,7 +9,7 @@
 	  </div>
 
   	<div class="container" style="background-color: white;">
-  		<table class="table">
+  		<table class="table" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">
   			<thead>
   				<tr id="table_head" style="text-align: center;">
   					<th style="width: 10px;">#</th>

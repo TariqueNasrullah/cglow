@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Chat Room</title>
+    <title>CgLoW Judge Pannel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://www.google-analytics.com">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet" type="text/css">
@@ -31,6 +31,7 @@
     
 </head>
 <body class="website-mode">
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height:100%; background: rgba(255,255,255,0.8); z-index: -1;"></div>
     <div class="container">
         <div class="content page">      
             <div id="side-bar">
@@ -648,7 +649,7 @@
         const dTable = $('#submission_table').DataTable( {
             data: sub_list_json,
             "order": [[0, 'desc']],
-            "pageLength": 50,
+            "pageLength": 20,
             "columnDefs": [{
                 "targets": 5,
                 "createdCell": function(td, cellData, rowData, row, col){

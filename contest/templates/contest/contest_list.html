@@ -6,7 +6,7 @@
   </div>
 
   <div class="container">
-    <div class="list-group">
+    <div class="list-group" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">
       {% for contest in contest_list %}
         <a href="{% url 'contest_info' pk=contest.id %}" class="list-group-item list-group-item-action list-group-item-contestlist">
         <h4 class="contest-name-header">{{contest.name}}</h4>
@@ -21,7 +21,7 @@
     <h4 class="white-background-header" style="font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;">PAST CONTESTS</h4>
   </div>
   <div class="container">
-    <div class="list-group">
+    <div class="list-group" style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);">
       {% for contest in past_contest %}
         <a href="{% url 'contest_info' pk=contest.id %}" class="list-group-item list-group-item-action list-group-item-contestlist">
         <h4 class="contest-name-header">{{contest.name}}</h4>
@@ -29,6 +29,5 @@
         </a>
       {% endfor%}
     </div>
-
   </div>
 {% endblock %}
