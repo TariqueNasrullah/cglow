@@ -11,7 +11,7 @@ class clearifications(models.Model):
 
     clearification_text = models.TextField(max_length=1000, null=False, blank=False)
     judge_ignored = models.BooleanField(default=False)
-    judge_answer = models.TextField(max_length=4000, default="")
+    judge_answer = models.TextField(max_length=4000, default="", blank=True)
 
 class clearifications_viewed(models.Model):
     clearifications_id = models.ForeignKey(clearifications, on_delete=models.CASCADE)

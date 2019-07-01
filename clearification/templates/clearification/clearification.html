@@ -88,6 +88,8 @@
 
 {% block content %}
     {% if running %}
+
+        <div class="container">
         <div class="row">
             <div class="col-md-4">
                 <div class="clearification-form-holder">
@@ -123,12 +125,20 @@
                             <div class="test">
                                 <div class="row">
                                     <div class="col-md-1 col-sm-1 col-1" style="border: 1px solid black; margin-left: 15px;">
-                                        {{ c.associated_problem.problem_title }}
+                                        <div style="top: 50%; left: 50%; position: absolute; transform: translate(-50%,-50%);">
+                                            <h5>{{ c.associated_problem.problem_title }}</h5>
+                                        </div>
                                     </div>
                                     <div class="col-md-10 col-sm-10 col-10">
                                         <p style="padding-bottom: 1rem; margin-top: 5px; font-size: 18px;"> {{ c.clearification_text }} </p>
                                         <hr>
-                                        <p style="font-size: 15px;">this is answer</p>
+                                        {% if c.judge_ignored == True %}
+                                            <p style="font-size: 15px;">Ignored</p>
+                                        {% elif c.judge_answer|length > 0  %}
+                                            <p style="font-size: 15px;">{{c.judge_answer}}</p>
+                                        {% else %}
+                                        <p style="font-size: 15px;">Not Answered Yet!</p>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -137,5 +147,6 @@
                 </div>
             </div>
         </div>
-{% endif %}
+        </div>
+    {% endif %}
 {% endblock %}
