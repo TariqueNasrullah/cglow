@@ -1,5 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from contest.models import *
+from . models import clearifications
+from django.contrib.auth.models import User
 import datetime
 
 def clearification(request, contest_name):
@@ -23,7 +25,25 @@ def clearification(request, contest_name):
         context['contest'] = this_contest
         context['contest_id'] = contest_name
         context['problem_list'] = problem_list
+        context['contest_info'] = this_contest
+
+        clearification_list = clearifications.objects.filter(associated_contest=this_contest)
+        context['clearification_list'] = clearification_list
+
         return render(request, 'clearification/clearification.html', context)
     else:
-        print(request.POST)
+        #print(request.POST)
+        problem_id = request.POST['problem_name']
+        clearification_text = request.POST['clearification-text']
+
+        problem_instance = contest_problemset.objects.get(pk=problem_id)
+        contest_instance = problem_instance.contest_id
+        author = request.user
+        clearification_instance = clearifications(
+            associated_contest = contest_instance,
+            associated_problem = problem_instance,
+            author = author,
+            clearification_text = clearification_text
+        )
+        clearification_instance.save()
         return HttpResponse("Post successfull")

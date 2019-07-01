@@ -13,9 +13,6 @@ class clearifications(models.Model):
     judge_ignored = models.BooleanField(default=False)
     judge_answer = models.TextField(max_length=4000, default="")
 
-    def __str__(self):
-        return self.associated_contest + " " + self.associated_problem + " " + self.clearification_text
-
 class clearifications_viewed(models.Model):
     clearifications_id = models.ForeignKey(clearifications, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
