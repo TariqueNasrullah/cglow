@@ -64,7 +64,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_rabbitmq.core.RabbitmqChannelLayer",
         "CONFIG": {
-            "host": "amqp://guest:guest@127.0.0.1",
+            "host": "amqp://admin:admin@127.0.0.1",
         },
     },
 }
@@ -144,4 +144,4 @@ STATICFILES_DIRS = [
     BASE_DIR,
 ]
 
-CELERY_BROKER_URL = 'amqp://localhost'
+CELERY_BROKER_URL = 'amqp://admin:admin@127.0.0.1'
