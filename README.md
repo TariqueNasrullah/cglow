@@ -7,7 +7,7 @@ make sure ``rabbitmq-server`` is listening to port ``5672``
 Language Requirement:  ``python3``
 
 # Installation::
-
+	
 	pip3 install virtualenv
 	python3 -m virtualenv projectCglow
 	cd projectCglow/
@@ -15,6 +15,8 @@ Language Requirement:  ``python3``
 	git clone https://github.com/TariqueNasrullah/cglow.git
 	cd cglow
 	pip install -r requirement.txt
+	cd rabbitmq
+	docker-compose up -d
 
 
 Goto 'projectCglow/cglow/contestjudger' and RUN
