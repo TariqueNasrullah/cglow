@@ -13,10 +13,8 @@ Language Requirement:  ``python3``
 	cd projectCglow/
 	source bin/activate
 	git clone https://github.com/TariqueNasrullah/cglow.git
-	pip install django
-	pip install celery
-	pip install docker
-	pip install channels
+	cd cglow
+	pip install -r requirement.txt
 
 
 Goto 'projectCglow/cglow/contestjudger' and RUN
