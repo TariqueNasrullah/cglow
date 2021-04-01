@@ -1,6 +1,6 @@
 # CgloW-OnlineJudge
 
-Make sure ``docker.io``, ``rabbitmq-server`` is installed.
+Make sure ``docker.io`` is installed
 
 make sure ``rabbitmq-server`` is listening to port ``5672``
 
