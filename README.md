@@ -1,6 +1,6 @@
 # CgloW-OnlineJudge
 
-Make sure ``docker.io``, ``rabbitmq-server`` is installed.
+Make sure ``docker.io`` is installed
 
 make sure ``rabbitmq-server`` is listening to port ``5672``
 
@@ -12,7 +12,7 @@ Language Requirement:  ``python3``
 	python3 -m virtualenv projectCglow
 	cd projectCglow/
 	source bin/activate
-	git clone https://github.com/TariqueNasrullah/cglow.git
+	Clone the Repository
 	cd cglow
 	pip install -r requirement.txt
 	cd rabbitmq
